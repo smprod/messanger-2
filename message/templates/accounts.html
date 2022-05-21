@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Все аккаунты{% endblock title %}
+
+{% block content %}
+<h1>Все аккаунты</h1>
+<br>
+{% for a in accounts %}
+<a href="{% url 'show_profile' a.id %}">{{ a }}</a>
+<br>
+{% endfor %}
+{% endblock content %}

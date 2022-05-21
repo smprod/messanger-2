@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Профиль {{ profile }}{% endblock title %}
+
+{% block content %}
+<h1>Профиль: {{ profile }}</h1>
+<br>
+{% if profile.is_staff %}
+<h2>Роль: администратор</h2>
+{% else %}
+<h2>Роль: посетитель</h2>
+{% endif %}
+{% if profile.last_name and profile.first_name %}
+<h3>ФИ: {{ profile.last_name }} {{ profile.first_name }}</h3>
+{% endif %}
+{% if not user.id == profile.id %}
+<a role="button" href="{% url 'chat' profile.id %}" class="btn btn-success">Написать</a>
+{% endif %}
+{% endblock content %}

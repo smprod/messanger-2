@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+{% if not user.id == prof.id %}
+<br>
+<button class="open-button" onclick="openForm()">Chat</button>
+<div class="messages">
+    {% for m in object_list %}
+    {% if m.from_who == user %}
+    <span class="user-message">{{ m.message }}</span>
+    <br>
+    <br>
+    <br>
+    {% else %}
+    <span class="an-user-message">{{ m.message }}</span>
+    <br>
+    <br>
+    <br>
+    {% endif %}
+    {% endfor %}
+</div>
+<div class="chat-popup" id="myForm">
+  <form action="" method="post" class="form-container">
+    {% csrf_token %}
+    <h1>Чат</h1>
+    {{ form.as_p }}
+
+    <button type="submit" class="btn">Отправить</button>
+    <button type="button" class="btn cancel" onclick="closeForm()">Закрыть</button>
+  </form>
+</div>
+{% else %}
+<br>
+<h1>Вы не можете отправлять сообщение самому себе</h1>
+{% endif %}
+{% else %}
+<br>
+<h1>Вы должны войти чтобы писать сообщения</h1>
+{% endif %}
+{% endblock content %}
